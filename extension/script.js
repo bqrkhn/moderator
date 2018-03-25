@@ -12,12 +12,9 @@ function url(link) {
         success: function (response) {
             console.log("AJAX Success. SCORE =>");
             console.log(response.score); //T  his works
-            chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-              if (request.method == "getSelection")
-                sendResponse({data: response.score.toString()});
-              else
-                sendResponse({}); // snub them.
-            });
+            chrome.runtime.sendMessage({score: response.score}, function(response) {
+              //  console.log(response.farewell);
+              });
         },
         error: function (error) {
             console.log("AJAX Error. Error =>");

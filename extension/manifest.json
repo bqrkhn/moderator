@@ -8,12 +8,12 @@
       "default_icon": "icon.png"
     },
     "content_scripts": [{
-      "matches": ["https://*/*"],
+      "matches": ["https://*/*","http://*/*"],
       "js": [ "jquery.js","script.js"]
       }
     ],
     "permissions": [
-      "tabs"
+      "tabs","http://*/*"
     ],
     "background": {
       "scripts": ["background.js"]

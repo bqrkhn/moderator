@@ -13,7 +13,8 @@
       }
     ],
     "permissions": [
-      "tabs","http://*/*"
+      "tabs","http://*/*",
+      "storage"
     ],
     "background": {
       "scripts": ["background.js"]

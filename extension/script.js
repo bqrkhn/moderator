@@ -10,12 +10,13 @@ function url(link) {
     $.ajax({
         dataType: "text",
         type: "POST",
-        url : "https://localhost/moderator/check.php",
+        url : "https://35.185.133.86/check.php",
         data: {
           'url' : link,
         },
         success : function(response){
           if(response=="0") {
+			console.log("in here");
             $.ajax({
               url: 'https://35.185.133.86:5000/postmethod',
               data: JSON.stringify(data),
@@ -27,7 +28,7 @@ function url(link) {
               			polarising_score = response.score;
               			chrome.runtime.sendMessage({score: response.score}, function(response) {});
                     $.ajax({
-                        url: 'https://localhost/moderator/insert.php',
+                        url: 'https://35.185.133.86/insert.php',
                         data: {
                           'url' : link,
                           'score' : response.score,

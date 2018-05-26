@@ -53,7 +53,7 @@ function url(link) {
           });
         }
         else {
-            console.log("else");
+            console.log("else do this");
             console.log(response);
             var result = JSON.parse(response);
             console.log(result.score);

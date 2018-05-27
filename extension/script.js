@@ -5,7 +5,7 @@ url(link);
 var polarising_score;
 
 function url(link) {
-    console.log("AJAX Start");
+    console.log("AJAX Start - Checking Scholar");
     var data = {js_link: link}
     $.ajax({
         dataType: "text",

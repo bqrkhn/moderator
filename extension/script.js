@@ -16,7 +16,7 @@ function url(link) {
         },
         success : function(response){
           if(response=="0") {
-			console.log("in here");
+			    console.log("in here 0");
             $.ajax({
               url: 'https://35.185.133.86:5000/postmethod',
               data: JSON.stringify(data),
@@ -52,6 +52,30 @@ function url(link) {
               contentType: 'application/json;charset=UTF-8',
           });
         }
+
+        else if(response=="1") {
+          console.log("in here 1");
+          $.ajax({
+            url: 'https://35.185.133.86:5000/postmethod',
+            data: JSON.stringify(data),
+            type: 'POST',
+            success: function (response) {
+                  console.log("AJAX Success. SCORE =>");
+                  console.log(response);
+                  console.log(response.score); //T  his works
+                  polarising_score = response.score;
+                  chrome.runtime.sendMessage({score: response.score}, function(response) {});
+
+            },
+            error: function (error) {
+                console.log("AJAX Error. Error =>");
+                console.log(error);
+            },
+            dataType: "json",
+            contentType: 'application/json;charset=UTF-8',
+          });         
+        }
+
         else {
             console.log("else");
             console.log(response);

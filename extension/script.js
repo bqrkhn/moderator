@@ -65,7 +65,6 @@ function url(link) {
                   console.log(response.score); //T  his works
                   polarising_score = response.score;
                   chrome.runtime.sendMessage({score: response.score}, function(response) {});
-
             },
             error: function (error) {
                 console.log("AJAX Error. Error =>");
@@ -89,5 +88,6 @@ function url(link) {
 }
 
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
+  if (message.from_test == "givemescore")
 			sendResponse(polarising_score);
       });

@@ -3,6 +3,7 @@ var link = location.href;
 url(link);
 
 var polarising_score;
+var s_score;
 
 function url(link) {
     console.log("AJAX Start");
@@ -25,8 +26,9 @@ function url(link) {
                     console.log("AJAX Success. SCORE =>");
       			        console.log(response);
                     console.log(response.score); //T  his works
-              			polarising_score = response.score;
-              			chrome.runtime.sendMessage({score: response.score}, function(response) {});
+                    polarising_score = response.score;
+                    scholar_score = response.scholar_score[0];
+              			chrome.runtime.sendMessage({score: response.score, s_score: scholar_score}, function(response) {});
                     $.ajax({
                         url: 'https://35.234.58.64/insert.php',
                         data: {
@@ -64,7 +66,8 @@ function url(link) {
                   console.log(response);
                   console.log(response.score); //T  his works
                   polarising_score = response.score;
-                  chrome.runtime.sendMessage({score: response.score}, function(response) {});
+                  scholar_score = response.scholar_score[0];
+                  chrome.runtime.sendMessage({score: response.score, s_score: scholar_score}, function(response) {});
 
             },
             error: function (error) {
@@ -89,5 +92,5 @@ function url(link) {
 }
 
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
-			sendResponse(polarising_score);
+			sendResponse({score: polarising_score, s_score: scholar_score});
 			});

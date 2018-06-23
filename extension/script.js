@@ -10,7 +10,7 @@ function url(link) {
     $.ajax({
         dataType: "text",
         type: "POST",
-        url : "https://35.185.133.86/check.php",
+        url : "https://35.234.58.64/check.php",
         data: {
           'url' : link,
         },
@@ -18,7 +18,7 @@ function url(link) {
           if(response=="0") {
 			    console.log("in here 0");
             $.ajax({
-              url: 'https://35.185.133.86:5000/postmethod',
+              url: 'https://35.234.58.64:5000/postmethod',
               data: JSON.stringify(data),
               type: 'POST',
               success: function (response) {
@@ -28,7 +28,7 @@ function url(link) {
               			polarising_score = response.score;
               			chrome.runtime.sendMessage({score: response.score}, function(response) {});
                     $.ajax({
-                        url: 'https://35.185.133.86/insert.php',
+                        url: 'https://35.234.58.64/insert.php',
                         data: {
                           'url' : link,
                           'score' : response.score,
@@ -56,7 +56,7 @@ function url(link) {
         else if(response=="1") {
           console.log("in here 1");
           $.ajax({
-            url: 'https://35.185.133.86:5000/postmethod',
+            url: 'https://35.234.58.64:5000/postmethod',
             data: JSON.stringify(data),
             type: 'POST',
             success: function (response) {

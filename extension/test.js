@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(rate_value);
 
         $.ajax({
-          url: 'https://35.185.133.86/insert.php',
+          url: 'https://35.234.58.64/insert.php',
           data: {
             'url':  link ,
             'id' : 'scholar',

@@ -59,8 +59,8 @@ include("db_connect.php");
     ?>
     <div class="container">
       <div class="row">
-        <h3>To be reviewed:</h3><br /><br /><br />
-        <div class="col-lg-10 offset-lg-1">
+        <div class="col-lg-8">
+          <h3>To be reviewed:</h3><br /><br />
           <table class="table">
             <thead class="thead-dark">
               <tr>
@@ -95,6 +95,28 @@ include("db_connect.php");
                ?>
             </tbody>
           </table>
+        </div>
+        <?php
+        $sql = "SELECT * FROM scholars ORDER BY articles_reviewed DESC LIMIT 5";
+        $result = $con->query($sql);
+        ?>
+        <div class="col-lg-3 offset-lg-1">
+          <h3>Top Scholars:</h3><br /><br />
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Articles Reviewed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                while($row = $result->fetch_assoc()) {?>
+                  <tr>
+                    <td>
+                      @<?php echo $row['username']; ?>&nbsp;&nbsp;(<code><?php echo $row['articles_reviewed']; ?></code>)
+                    </td>
+                  </tr><?php } ?>
+            </tbody>
         </div>
       </div>
     </div>

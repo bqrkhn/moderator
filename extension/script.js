@@ -27,7 +27,7 @@ function url(link) {
       			        console.log(response);
                     console.log(response.score); //T  his works
                     polarising_score = response.score;
-                    scholar_score = response.scholar_score[0];
+                    scholar_score = 0 ;
               			chrome.runtime.sendMessage({score: response.score, s_score: scholar_score}, function(response) {});
                     $.ajax({
                         url: 'https://35.234.58.64/insert.php',

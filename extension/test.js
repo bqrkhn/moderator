@@ -15,7 +15,9 @@ chrome.runtime.onMessage.addListener(
     var scholar_score;
     final_score = 3.495029 - 9.310174 * request.score + 8.620465 * request.score * request.score;
     final_score = final_score.toFixed(1);
-    scholar_score = 3.495029 - 9.310174 * request.s_score + 8.620465 * request.s_score * request.s_score;
+    scholar_score = 0.199300699 - 17.80769231 * request.s_score - 8.216783217 * request.s_score * request.s_score;
+    if (request.s_score >= 0)
+      scholar_score = 0;
     scholar_score = scholar_score.toFixed(0);
     var text = document.getElementById('score');
     var stext = document.getElementById('scholar');
@@ -53,7 +55,9 @@ chrome.runtime.onMessage.addListener(
     var scholar_score;
     final_score = 3.495029 - 9.310174 * response.score + 8.620465 * response.score * response.score;
     final_score = final_score.toFixed(1);
-    scholar_score = 3.495029 - 9.310174 * response.s_score + 8.620465 * response.s_score * response.s_score;
+    scholar_score = 0.199300699 - 17.80769231 * response.s_score - 8.216783217 * response.s_score * response.s_score;
+    if (response.s_score >= 0)
+      scholar_score = 0;
     scholar_score = scholar_score.toFixed(0);
     var stext = document.getElementById('scholar');
     var text = document.getElementById('score');

@@ -19,47 +19,14 @@ include("db_connect.php");
     if(!isset($_SESSION['username'])){
       header("Location:login.php");
     }
-     ?>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
-          <a href="https://localhost/moderator/logout.php"><button class="btn btn-danger">Logout</button></a>
-      </div>
-    </nav><br /><br />
-    <?php
-    $sql = "SELECT * FROM info WHERE scholar_score=0 ORDER BY score DESC";
+    include("navbar.php");
+    $sql = "SELECT * FROM info ORDER BY score DESC";
     $result = $con->query($sql);
     $i=1;
     ?>
     <div class="container">
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
           <h3>To be reviewed:</h3><br /><br />
           <table class="table">
             <thead class="thead-dark">
@@ -76,7 +43,7 @@ include("db_connect.php");
                 while($row = $result->fetch_assoc()) {?>
                   <tr>
                     <th scope="row"><?php echo $i++;?></th>
-                    <td><a href="<?php echo $row['url'];?>">Link</a></td>
+                    <td><a href="<?php echo $row['url'];?>"><?php echo custom_echo($row['url'],50);?></a></td>
                     <td><?php echo $row['score'];?></td>
                     <td>
                         <select class="form-control" id="<?php echo $row['id'];?>">
@@ -84,6 +51,7 @@ include("db_connect.php");
                           <option>2</option>
                           <option>3</option>
                           <option>4</option>
+                          <option>5</option>
                         </select>
                       </td>
                       <td>
@@ -95,28 +63,6 @@ include("db_connect.php");
                ?>
             </tbody>
           </table>
-        </div>
-        <?php
-        $sql = "SELECT * FROM scholars ORDER BY articles_reviewed DESC LIMIT 5";
-        $result = $con->query($sql);
-        ?>
-        <div class="col-lg-3 offset-lg-1">
-          <h3>Top Scholars:</h3><br /><br />
-          <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Articles Reviewed</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-                while($row = $result->fetch_assoc()) {?>
-                  <tr>
-                    <td>
-                      @<?php echo $row['username']; ?>&nbsp;&nbsp;(<code><?php echo $row['articles_reviewed']; ?></code>)
-                    </td>
-                  </tr><?php } ?>
-            </tbody>
         </div>
       </div>
     </div>
